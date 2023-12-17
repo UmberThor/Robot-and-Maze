@@ -25,13 +25,26 @@ void RandomRobot::move(const Maze& maze)
     int dY = rand() % 3 - 1;
     Point expected = {current.x + dX, current.y + dY};
     // deve rifare se: sta fermo, va addosso a un muro, esce dal range
+
+    if (maze.is_wall(Point(current.x + 1, current.y)) && maze.is_wall(Point(current.x -1, current.y)) && maze.is_wall(Point(current.x, current.y+1)) && maze.is_wall(Point(current.x, current.y-1)))
+    {
+        maze.display_with_robot(current, 'X');
+        std::cout << "I'm stuck!" << '\n';
+        throw StuckRobotException{};
+    }
+
+    Point cross_x = {current.x + dX, current.y};
+    Point cross_y = {current.x, current.y + dY};
+
     if (!maze.is_inside(expected) || expected == current || maze.is_wall(expected)) // ordine importante! se è fuori allora rifare (cortocircuito), senza controllare se è un muro
         move(maze);
+    else if (maze.is_wall(cross_x) && maze.is_wall(cross_y)) // per evitare gli attraversamenti tipo :        *   ->     R*
+        move(maze);                                          //                                              *R          *
     else
     {
         current.x += dX;
         current.y += dY;
-    }
+        }
 }
 
 RightHandRuleRobot::RightHandRuleRobot(const Point &s, char d)
@@ -94,7 +107,7 @@ void RightHandRuleRobot::move(const Maze& maze)
         // altrimenti sei bloccato: errore!
         else
         {
-            maze.display_with_robot(current, direction);
+            maze.display_with_robot(current, 'X');
             std::cout << "I can't exit!" << '\n';
             throw StuckRobotException{};
         }
@@ -107,7 +120,7 @@ void RightHandRuleRobot::move(const Maze& maze)
         {
             if (step == past_steps[i])
             {
-                maze.display_with_robot(current, direction);
+                maze.display_with_robot(current, 'X');
                 std::cout << "I'm stuck in a loop!" << '\n';
                 throw StuckRobotException{};
             }

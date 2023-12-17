@@ -17,7 +17,7 @@ int main()
     Maze maze("../mazes/maze1.txt", 9, 9);
 
     //tests(maze);
-    right_robot(maze);
+    //right_robot(maze);
     random_robot(maze);
 
     return 0;
@@ -42,7 +42,7 @@ void random_robot(const Maze& maze)
         maze.display_with_robot(rand_robot.get_position(), 'R');
         count++;
         std::cout << count << '\n';
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        std::this_thread::sleep_for(std::chrono::milliseconds(250));
     }
     std::cout << "Required steps: " << count << "\n";
 }
@@ -82,7 +82,7 @@ void right_robot (const Maze& maze)
         //char x;
         //std::cin >> x;
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        std::this_thread::sleep_for(std::chrono::milliseconds(250));
     }
     std::cout << "Required steps: " << count << "\n";
 }

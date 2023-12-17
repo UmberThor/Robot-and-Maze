@@ -14,10 +14,11 @@ void right_robot(const Maze &maze);
 int main()
 {
 
-    Maze maze("../mazes/maze1.txt", 9, 9);
+    Maze maze("../mazes/maze3.txt", 9, 9);
 
     //tests(maze);
-    //right_robot(maze);
+    right_robot(maze);
+    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
     random_robot(maze);
 
     return 0;
@@ -49,7 +50,8 @@ void random_robot(const Maze& maze)
 
 void right_robot (const Maze& maze)
 {
-    RightHandRuleRobot right_robot{maze.get_start()};
+    RightHandRuleRobot right_robot{};
+    right_robot.set_position(maze.get_start());
     int count = 0;
     char c = ' ';
 

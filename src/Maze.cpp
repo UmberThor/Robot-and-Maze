@@ -7,6 +7,11 @@ Point::Point(int a, int b)
     set(a, b);
 }
 
+Point::Point(const Point& p)
+{
+    set(p.x, p.y);
+}
+
 void Point::set(int a, int b) {
     x = a;
     y = b;

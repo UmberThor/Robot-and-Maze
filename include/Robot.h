@@ -6,8 +6,10 @@
 class Robot {
   public:
     Robot(const Point& s);
+    Robot();
 
     Point get_position() const;
+    Point set_position(const Point& p);
 
     virtual void move(const Maze& maze) = 0;
 
@@ -19,13 +21,15 @@ class Robot {
 class RandomRobot : public Robot {
   public:
     RandomRobot(const Point& s);
+    RandomRobot();
 
     void move(const Maze &maze) override;
 };
 
 class RightHandRuleRobot : public Robot {
   public:
-    RightHandRuleRobot(const Point &s, char d = 'L');
+    RightHandRuleRobot(const Point &s, char d = 'R');
+    RightHandRuleRobot();
 
     char get_direction();
 

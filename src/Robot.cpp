@@ -8,9 +8,18 @@ Robot::Robot(const Point& s)
     : current{s}
 {}
 
+Robot::Robot()
+    : current{Point{-1,-1}}
+{}
+
 Point Robot::get_position() const
 {
     return current;
+}
+
+Point Robot::set_position(const Point &p)
+{
+    current = p;
 }
 
 RandomRobot::RandomRobot(const Point &s)
@@ -18,6 +27,13 @@ RandomRobot::RandomRobot(const Point &s)
 {
     srand(time(NULL));
 }
+
+RandomRobot::RandomRobot()
+    : Robot{}
+{
+    srand(time(NULL));
+}
+
 
 void RandomRobot::move(const Maze& maze)
 {
@@ -49,6 +65,10 @@ void RandomRobot::move(const Maze& maze)
 
 RightHandRuleRobot::RightHandRuleRobot(const Point &s, char d)
     : Robot{s}, direction{d}
+{}
+
+RightHandRuleRobot::RightHandRuleRobot()
+    : Robot{}, direction{'R'}
 {}
 
 char RightHandRuleRobot::get_direction()

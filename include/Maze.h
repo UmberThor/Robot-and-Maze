@@ -8,9 +8,10 @@ struct Point
 {
   int x;
   int y;
-  
+
   Point(int a = -1, int b = -1);
-  
+  Point(const Point& p);
+
   void set(int a, int b);
 
   bool operator==(Point p);
